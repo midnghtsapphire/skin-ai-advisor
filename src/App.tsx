@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import SkinQuiz from "./pages/SkinQuiz";
 import Routine from "./pages/Routine";
+import IngredientChecker from "./pages/IngredientChecker";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/skin-quiz" element={<SkinQuiz />} />
             <Route path="/routine" element={<Routine />} />
+            <Route path="/ingredient-checker" element={<IngredientChecker />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
