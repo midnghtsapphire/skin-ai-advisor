@@ -78,7 +78,7 @@ const QuizResults = ({ skinType, concerns }: QuizResultsProps) => {
         <Button
           variant="hero"
           size="lg"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/routine")}
           className="group"
         >
           <Sparkles className="w-5 h-5" />
@@ -86,7 +86,7 @@ const QuizResults = ({ skinType, concerns }: QuizResultsProps) => {
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Button>
         <p className="text-sm text-muted-foreground">
-          Your profile has been saved. We'll use this to personalize your experience.
+          Your profile has been saved. Click above to see your AI-powered routine.
         </p>
       </div>
     </div>
