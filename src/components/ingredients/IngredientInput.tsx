@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search, Sparkles, ClipboardPaste } from "lucide-react";
+import { Search, Sparkles, ClipboardPaste, Camera } from "lucide-react";
+import CameraScanner from "./CameraScanner";
 
 interface IngredientInputProps {
   onAnalyze: (ingredients: string) => void;
@@ -11,6 +12,7 @@ interface IngredientInputProps {
 
 const IngredientInput = ({ onAnalyze, isLoading }: IngredientInputProps) => {
   const [ingredients, setIngredients] = useState("");
+  const [scannerOpen, setScannerOpen] = useState(false);
 
   const handlePaste = async () => {
     try {
@@ -27,58 +29,80 @@ const IngredientInput = ({ onAnalyze, isLoading }: IngredientInputProps) => {
     }
   };
 
+  const handleIngredientsExtracted = (extractedIngredients: string) => {
+    setIngredients(extractedIngredients);
+  };
+
   return (
-    <Card className="glass-card border-primary/10">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Search className="h-5 w-5 text-primary" />
-          Enter Ingredients
-        </CardTitle>
-        <CardDescription>
-          Paste or type the ingredient list from your skincare product
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="relative">
-          <Textarea
-            placeholder="e.g., Water, Glycerin, Niacinamide, Hyaluronic Acid, Salicylic Acid..."
-            value={ingredients}
-            onChange={(e) => setIngredients(e.target.value)}
-            className="min-h-[150px] resize-none"
-          />
+    <>
+      <Card className="glass-card border-primary/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Search className="h-5 w-5 text-primary" />
+            Enter Ingredients
+          </CardTitle>
+          <CardDescription>
+            Paste, type, or scan the ingredient list from your skincare product
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="relative">
+            <Textarea
+              placeholder="e.g., Water, Glycerin, Niacinamide, Hyaluronic Acid, Salicylic Acid..."
+              value={ingredients}
+              onChange={(e) => setIngredients(e.target.value)}
+              className="min-h-[150px] resize-none pr-24"
+            />
+            <div className="absolute top-2 right-2 flex flex-col gap-1">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handlePaste}
+              >
+                <ClipboardPaste className="h-4 w-4 mr-1" />
+                Paste
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => setScannerOpen(true)}
+              >
+                <Camera className="h-4 w-4 mr-1" />
+                Scan
+              </Button>
+            </div>
+          </div>
+          
           <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            className="absolute top-2 right-2"
-            onClick={handlePaste}
+            onClick={handleSubmit}
+            disabled={!ingredients.trim() || isLoading}
+            className="w-full"
+            variant="hero"
+            size="lg"
           >
-            <ClipboardPaste className="h-4 w-4 mr-1" />
-            Paste
+            {isLoading ? (
+              <>
+                <Sparkles className="h-4 w-4 animate-pulse" />
+                Analyzing...
+              </>
+            ) : (
+              <>
+                <Sparkles className="h-4 w-4" />
+                Analyze Ingredients
+              </>
+            )}
           </Button>
-        </div>
-        
-        <Button
-          onClick={handleSubmit}
-          disabled={!ingredients.trim() || isLoading}
-          className="w-full"
-          variant="hero"
-          size="lg"
-        >
-          {isLoading ? (
-            <>
-              <Sparkles className="h-4 w-4 animate-pulse" />
-              Analyzing...
-            </>
-          ) : (
-            <>
-              <Sparkles className="h-4 w-4" />
-              Analyze Ingredients
-            </>
-          )}
-        </Button>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+
+      <CameraScanner
+        open={scannerOpen}
+        onOpenChange={setScannerOpen}
+        onIngredientsExtracted={handleIngredientsExtracted}
+      />
+    </>
   );
 };
 
