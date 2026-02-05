@@ -23,11 +23,11 @@ const Navbar = () => {
 
   const navLinks = [
     { href: "#features", label: "Features" },
-    { href: "#how-it-works", label: "How It Works" },
+    { href: "/shop", label: "Shop", isRoute: true },
     { href: "/ingredient-checker", label: "Ingredient Checker", isRoute: true },
     { href: "/saved-products", label: "Favorites", isRoute: true },
-    { href: "#pricing", label: "Pricing" },
-    { href: "#faq", label: "FAQ" },
+    { href: "/affiliates", label: "Affiliates", isRoute: true },
+    { href: "/orders", label: "Orders", isRoute: true },
   ];
 
   return (
