@@ -18,6 +18,12 @@ import Orders from "./pages/Orders";
 import OrderDetail from "./pages/OrderDetail";
 import Returns from "./pages/Returns";
 import Affiliates from "./pages/Affiliates";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminProjects from "./pages/admin/AdminProjects";
+import AdminDocuments from "./pages/admin/AdminDocuments";
+import AdminQA from "./pages/admin/AdminQA";
+import AdminBacklog from "./pages/admin/AdminBacklog";
+import AdminAgents from "./pages/admin/AdminAgents";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminInventory from "./pages/admin/AdminInventory";
 import AdminOrders from "./pages/admin/AdminOrders";
@@ -47,6 +53,13 @@ const App = () => (
               <Route path="/orders/:id" element={<OrderDetail />} />
               <Route path="/returns" element={<Returns />} />
               <Route path="/affiliates" element={<Affiliates />} />
+              {/* Admin Routes */}
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/projects" element={<AdminProjects />} />
+              <Route path="/admin/documents" element={<AdminDocuments />} />
+              <Route path="/admin/qa" element={<AdminQA />} />
+              <Route path="/admin/backlog" element={<AdminBacklog />} />
+              <Route path="/admin/agents" element={<AdminAgents />} />
               <Route path="/admin/products" element={<AdminProducts />} />
               <Route path="/admin/inventory" element={<AdminInventory />} />
               <Route path="/admin/orders" element={<AdminOrders />} />
