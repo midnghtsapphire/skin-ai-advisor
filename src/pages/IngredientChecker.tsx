@@ -11,6 +11,7 @@ import AnalysisScore from "@/components/ingredients/AnalysisScore";
 import IngredientsList from "@/components/ingredients/IngredientsList";
 import AnalysisTips from "@/components/ingredients/AnalysisTips";
 import SaveProductButton from "@/components/ingredients/SaveProductButton";
+import ShareProductButton from "@/components/products/ShareProductButton";
 import type { IngredientAnalysis } from "@/types/ingredients";
 
 const IngredientChecker = () => {
@@ -168,7 +169,11 @@ const IngredientChecker = () => {
                 />
               </div>
               
-              <div className="flex justify-end">
+              <div className="flex justify-end gap-2">
+                <ShareProductButton 
+                  productName={null}
+                  analysis={analysis}
+                />
                 <SaveProductButton 
                   ingredients={currentIngredients} 
                   analysis={analysis} 
