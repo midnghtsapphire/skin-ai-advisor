@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ArrowLeft, AlertCircle, Sparkles } from "lucide-react";
@@ -10,19 +10,30 @@ import IngredientInput from "@/components/ingredients/IngredientInput";
 import AnalysisScore from "@/components/ingredients/AnalysisScore";
 import IngredientsList from "@/components/ingredients/IngredientsList";
 import AnalysisTips from "@/components/ingredients/AnalysisTips";
+import SaveProductButton from "@/components/ingredients/SaveProductButton";
 import type { IngredientAnalysis } from "@/types/ingredients";
 
 const IngredientChecker = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
   
   const [isLoading, setIsLoading] = useState(false);
   const [analysis, setAnalysis] = useState<IngredientAnalysis | null>(null);
+  const [currentIngredients, setCurrentIngredients] = useState("");
   const [skinProfile, setSkinProfile] = useState<{
     skinType: string | null;
     skinConcerns: string[] | null;
   }>({ skinType: null, skinConcerns: null });
+
+  // Handle navigation state from saved products
+  useEffect(() => {
+    if (location.state?.analysis && location.state?.ingredients) {
+      setAnalysis(location.state.analysis);
+      setCurrentIngredients(location.state.ingredients);
+    }
+  }, [location.state]);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -51,6 +62,7 @@ const IngredientChecker = () => {
   const handleAnalyze = async (ingredients: string) => {
     setIsLoading(true);
     setAnalysis(null);
+    setCurrentIngredients(ingredients);
 
     try {
       const response = await fetch(
@@ -148,11 +160,20 @@ const IngredientChecker = () => {
           {/* Results Section */}
           {analysis && (
             <div className="space-y-6 animate-fade-in">
-              <AnalysisScore
-                score={analysis.overallScore}
-                verdict={analysis.verdict}
-                summary={analysis.summary}
-              />
+              <div className="flex items-center justify-between">
+                <AnalysisScore
+                  score={analysis.overallScore}
+                  verdict={analysis.verdict}
+                  summary={analysis.summary}
+                />
+              </div>
+              
+              <div className="flex justify-end">
+                <SaveProductButton 
+                  ingredients={currentIngredients} 
+                  analysis={analysis} 
+                />
+              </div>
 
               <IngredientsList
                 beneficial={analysis.beneficialIngredients}

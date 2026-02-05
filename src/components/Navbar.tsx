@@ -25,6 +25,7 @@ const Navbar = () => {
     { href: "#features", label: "Features" },
     { href: "#how-it-works", label: "How It Works" },
     { href: "/ingredient-checker", label: "Ingredient Checker", isRoute: true },
+    { href: "/saved-products", label: "Favorites", isRoute: true },
     { href: "#pricing", label: "Pricing" },
     { href: "#faq", label: "FAQ" },
   ];
