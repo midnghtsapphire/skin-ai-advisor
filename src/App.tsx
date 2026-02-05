@@ -9,6 +9,7 @@ import Auth from "./pages/Auth";
 import SkinQuiz from "./pages/SkinQuiz";
 import Routine from "./pages/Routine";
 import IngredientChecker from "./pages/IngredientChecker";
+import SavedProducts from "./pages/SavedProducts";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/skin-quiz" element={<SkinQuiz />} />
             <Route path="/routine" element={<Routine />} />
             <Route path="/ingredient-checker" element={<IngredientChecker />} />
+            <Route path="/saved-products" element={<SavedProducts />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

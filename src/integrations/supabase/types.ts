@@ -47,6 +47,33 @@ export type Database = {
         }
         Relationships: []
       }
+      saved_products: {
+        Row: {
+          analysis_result: Json
+          created_at: string
+          id: string
+          ingredients: string
+          product_name: string | null
+          user_id: string
+        }
+        Insert: {
+          analysis_result: Json
+          created_at?: string
+          id?: string
+          ingredients: string
+          product_name?: string | null
+          user_id: string
+        }
+        Update: {
+          analysis_result?: Json
+          created_at?: string
+          id?: string
+          ingredients?: string
+          product_name?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
