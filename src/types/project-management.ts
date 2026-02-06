@@ -75,7 +75,7 @@ export interface AdminUser {
 export interface AgentTask {
   id: string;
   project_id: string | null;
-  task_type: 'generate_docs' | 'create_wireframe' | 'analyze_competitors' | 'generate_tests' | 'create_api_spec' | 'research';
+  task_type: 'generate_docs' | 'create_wireframe' | 'analyze_competitors' | 'generate_tests' | 'create_api_spec' | 'research' | 'generate_api_spec' | 'write_business_plan' | 'analyze_error_logs';
   input_data: Record<string, unknown> | null;
   output_data: Record<string, unknown> | null;
   status: 'pending' | 'processing' | 'completed' | 'failed';
@@ -105,4 +105,7 @@ export const AGENT_TASK_LABELS: Record<AgentTask['task_type'], string> = {
   generate_tests: 'Generate Tests',
   create_api_spec: 'Create API Spec',
   research: 'Research',
+  generate_api_spec: 'Generate OpenAPI Spec',
+  write_business_plan: 'Write Business Plan',
+  analyze_error_logs: 'Analyze Error Logs',
 };

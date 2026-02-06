@@ -77,6 +77,26 @@ serve(async (req) => {
       
       research: `Conduct research on: ${task.input_data?.prompt || "industry best practices"}.
         Include: findings summary, recommendations, sources, and action items.`,
+      
+      generate_api_spec: `Generate a complete OpenAPI 3.0 specification in YAML format for ${projectInfo?.name || "the project"}.
+        Include: all endpoints with HTTP methods, request/response schemas with examples, authentication schemes (JWT, API keys),
+        error responses (400, 401, 403, 404, 500), pagination parameters, rate limiting headers, and webhook definitions if applicable.
+        Project details: ${JSON.stringify(projectInfo || {})}
+        User input: ${task.input_data?.prompt || "Generate full OpenAPI spec for all endpoints"}`,
+      
+      write_business_plan: `Write a comprehensive business plan for ${projectInfo?.name || "the project"}.
+        Include: executive summary, market analysis, target audience personas, revenue model, pricing strategy,
+        competitive advantages, go-to-market strategy, financial projections (3-year), key metrics/KPIs,
+        risk analysis, and growth roadmap with milestones.
+        Project details: ${JSON.stringify(projectInfo || {})}
+        User input: ${task.input_data?.prompt || "Create a complete business plan"}`,
+      
+      analyze_error_logs: `Analyze the following error logs and provide actionable insights for ${projectInfo?.name || "the project"}.
+        Include: error categorization by severity and type, root cause analysis for each error pattern,
+        impact assessment, prioritized fix recommendations, prevention strategies,
+        and monitoring/alerting suggestions.
+        Error logs to analyze: ${task.input_data?.prompt || "No logs provided - please paste error logs"}
+        Project details: ${JSON.stringify(projectInfo || {})}`,
     };
 
     const systemPrompt = `You are an expert software architect and technical writer following Agile/XP methodologies.
